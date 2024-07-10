@@ -134,15 +134,6 @@ declare module 'astro:content' {
   data: any
 } & { render(): Render[".md"] };
 };
-"books": {
-"fav-books.md": {
-	id: "fav-books.md";
-  slug: "fav-books";
-  body: string;
-  collection: "books";
-  data: any
-} & { render(): Render[".md"] };
-};
 "contact": {
 "1-github.md": {
 	id: "1-github.md";
@@ -260,6 +251,15 @@ declare module 'astro:content' {
   slug: "project-5-smart-clamp";
   body: string;
   collection: "projects";
+  data: any
+} & { render(): Render[".md"] };
+};
+"skills": {
+"skills.md": {
+	id: "skills.md";
+  slug: "skills";
+  body: string;
+  collection: "skills";
   data: any
 } & { render(): Render[".md"] };
 };

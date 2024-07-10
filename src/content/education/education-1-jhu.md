@@ -1,7 +1,7 @@
 ---
 title: Johns Hopkins
 location: Baltimore, Maryland, USA
-tags: ["In Porgress"]
+tags: ["In Progress"]
 date: 2024-2026
 ---
 

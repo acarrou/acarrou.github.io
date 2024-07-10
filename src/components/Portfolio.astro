@@ -5,7 +5,7 @@ import Dropdown from "../layouts/DropdownLayout.astro";
 
 import * as about from "../content/about/about.md";
 const jobs = await Astro.glob("../content/jobs/*.md");
-const books = await Astro.glob("../content/books/*.md");
+const  skills = await Astro.glob("../content/skills/*.md");
 const projects = await Astro.glob("../content/projects/*.md");
 const education = await Astro.glob("../content/education/*.md");
 ---
@@ -64,9 +64,9 @@ const education = await Astro.glob("../content/education/*.md");
     }
   </Dropdown>
 
-  <Dropdown title={"Books"} icon={"carbon:book"}>
+  <Dropdown title={"Skills and Technologies"} icon={"carbon:skill-level"}>
     {
-      books.map((item) => {
+      skills.map((item) => {
         return (
           <Card
             title={item.frontmatter.title}
