@@ -1,7 +1,7 @@
 ---
 title: Gone with the Fire
 url: https://devpost.com/software/gone-with-the-fire
-tags: ["TypeScript", "React", "Node.js", "ExpressJS", "Azure", "MySQL", "CICD"]
+tags: ["C/C++", " Embedded Systems", "Firmware", "I2C", "UART", "LoRaWAN", "Hardware Design", "IoT"]
 date: SCEhacks 2021
 ---
 

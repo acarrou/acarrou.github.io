@@ -1,7 +1,7 @@
 ---
 title: Smart Flask
 url: https://devpost.com/software/smartflask
-tags: ["TypeScript", "React", "Node.js", "ExpressJS", "GCP", "MySQL", "CICD"]
+tags: ["C/C++", " Embedded Systems", "Firmware", "I2C", "UART", "Hardware Design", "IoT", "Depth Sensor"]
 date: CruzHacks 2022
 ---
 

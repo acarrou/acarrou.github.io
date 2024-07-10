@@ -181,45 +181,52 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 };
 "education": {
-"education-1-sjsu.md": {
-	id: "education-1-sjsu.md";
-  slug: "education-1-sjsu";
+"education-1-jhu.md": {
+	id: "education-1-jhu.md";
+  slug: "education-1-jhu";
+  body: string;
+  collection: "education";
+  data: any
+} & { render(): Render[".md"] };
+"education-2-sjsu.md": {
+	id: "education-2-sjsu.md";
+  slug: "education-2-sjsu";
   body: string;
   collection: "education";
   data: any
 } & { render(): Render[".md"] };
 };
 "jobs": {
-"job-1-genpact.md": {
-	id: "job-1-genpact.md";
-  slug: "job-1-genpact";
+"job-1-maxar.md": {
+	id: "job-1-maxar.md";
+  slug: "job-1-maxar";
   body: string;
   collection: "jobs";
   data: any
 } & { render(): Render[".md"] };
-"job-1.5-progressive-victory.md": {
-	id: "job-1.5-progressive-victory.md";
-  slug: "job-15-progressive-victory";
+"job-1.5-maxar.md": {
+	id: "job-1.5-maxar.md";
+  slug: "job-15-maxar";
   body: string;
   collection: "jobs";
   data: any
 } & { render(): Render[".md"] };
-"job-2-cdk-associate.md": {
-	id: "job-2-cdk-associate.md";
-  slug: "job-2-cdk-associate";
-  body: string;
-  collection: "jobs";
-  data: any
-} & { render(): Render[".md"] };
-"job-3-cdk-intern.md": {
-	id: "job-3-cdk-intern.md";
-  slug: "job-3-cdk-intern";
+"job-armada.md": {
+	id: "job-armada.md";
+  slug: "job-armada";
   body: string;
   collection: "jobs";
   data: any
 } & { render(): Render[".md"] };
 };
 "projects": {
+"project-1-astraeus.md": {
+	id: "project-1-astraeus.md";
+  slug: "project-1-astraeus";
+  body: string;
+  collection: "projects";
+  data: any
+} & { render(): Render[".md"] };
 "project-1-gone-with-the-fire.md": {
 	id: "project-1-gone-with-the-fire.md";
   slug: "project-1-gone-with-the-fire";
@@ -251,13 +258,6 @@ declare module 'astro:content' {
 "project-5-smart-clamp.md": {
 	id: "project-5-smart-clamp.md";
   slug: "project-5-smart-clamp";
-  body: string;
-  collection: "projects";
-  data: any
-} & { render(): Render[".md"] };
-"project-6-web-serial.md": {
-	id: "project-6-web-serial.md";
-  slug: "project-6-web-serial";
   body: string;
   collection: "projects";
   data: any

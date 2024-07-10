@@ -1,7 +1,7 @@
 ---
 title: Smart Tractor
 url: https://devpost.com/software/smart-tractor
-tags: ["TypeScript", "React", "Node.js", "ExpressJS", "AWS", "MySQL", "CICD"]
+tags: ["Python", "C/C++", " Embedded Systems", "Firmware", "Raspberry Pi", "Arduino", "IoT", "Computer Vision"]
 date: MakeUC 2022
 ---
 

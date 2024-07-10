@@ -1,7 +1,7 @@
 ---
 title: Clever Pedal
 url: https://devpost.com/software/clever-pedal
-tags: ["TypeScript", "React", "Node.js", "NestJS", "GCP", "MySQL", "CICD"]
+tags: ["Python", " Embedded Systems", "Firmware", "Raspberry Pi", "Hardware Design", "IoT", "Computer Vision"]
 date: HackDavis 2022
 ---
 
