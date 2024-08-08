@@ -5,6 +5,7 @@
 #### Embedded Systems
 - Firmware Development: Expertise in writing and optimizing firmware for various microcontrollers.
 - Hardware Design: Skilled in designing and prototyping hardware components.
+- PCB Design: Proficient in designing and fabricating PCBs for custom hardware solutions.
 - IoT (Internet of Things): Experienced in building and deploying IoT solutions.
 - Computer Vision: Implemented computer vision algorithms for embedded applications.
 - Machine Learning: Applied machine learning techniques to enhance embedded systems' capabilities.
@@ -23,6 +24,7 @@
 - Arduino Microcontrollers: Extensive experience in using Arduino for rapid prototyping.
 - ESP Microcontrollers: Skilled in developing IoT solutions with ESP microcontrollers.
 - STM Microcontrollers: Proficient in using STM microcontrollers for complex embedded applications.
+- nRF Microcontrollers: Experienced in developing BLE and IoT applications with nRF microcontrollers.
 
 #### Sensors and Peripherals
 - Depth Sensors: Integrated depth sensors for distance measurement applications.
