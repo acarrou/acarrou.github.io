@@ -195,6 +195,13 @@ declare module 'astro:content' {
   collection: "jobs";
   data: any
 } & { render(): Render[".md"] };
+"job-1-nexus.md": {
+	id: "job-1-nexus.md";
+  slug: "job-1-nexus";
+  body: string;
+  collection: "jobs";
+  data: any
+} & { render(): Render[".md"] };
 "job-1.5-maxar.md": {
 	id: "job-1.5-maxar.md";
   slug: "job-15-maxar";
