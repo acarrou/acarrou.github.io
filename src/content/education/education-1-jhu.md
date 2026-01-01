@@ -1,8 +1,8 @@
 ---
-title: Johns Hopkins
+title: Johns Hopkins University
 location: Baltimore, Maryland, USA
 tags: ["In Progress"]
-date: 2024-2026
+date: 2024 - 2026 (Expected May 2026)
 ---
 
-Masters of Science in Electrical and Computer Engineering
+M.S. in Electrical and Computer Engineering

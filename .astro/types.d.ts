@@ -188,9 +188,9 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 };
 "jobs": {
-"job-1-maxar.md": {
-	id: "job-1-maxar.md";
-  slug: "job-1-maxar";
+"job-1-lanteris.md": {
+	id: "job-1-lanteris.md";
+  slug: "job-1-lanteris";
   body: string;
   collection: "jobs";
   data: any

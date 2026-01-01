@@ -1,13 +1,19 @@
 <script>
   import { themeChange } from "theme-change";
   themeChange();
-  if (localStorage.getItem("theme") === null) {
+
+  const storedTheme = localStorage.getItem("theme");
+  if (storedTheme === null) {
     document.documentElement.setAttribute("data-theme", "black");
-  } else
-    document.documentElement.setAttribute(
-      "data-theme",
-      localStorage.getItem("theme")
-    );
+  } else {
+    document.documentElement.setAttribute("data-theme", storedTheme);
+  }
+
+  // Sync checkbox state with stored theme
+  const toggle = document.querySelector('input[data-toggle-theme]') as HTMLInputElement;
+  if (toggle && storedTheme === "lofi") {
+    toggle.checked = true;
+  }
 </script>
 
 <div
