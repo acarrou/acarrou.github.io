@@ -1,0 +1,405 @@
+---
+// Konami Code Easter Egg: Up Up Down Down Left Right Left Right B A
+// A little character runs in and steals the profile picture!
+---
+
+<div id="thief-character" class="thief hidden">
+  <div class="thief-body">
+    <div class="thief-head">
+      <div class="thief-eye thief-eye-left"></div>
+      <div class="thief-eye thief-eye-right"></div>
+      <div class="thief-mask"></div>
+    </div>
+    <div class="thief-torso"></div>
+    <div class="thief-arm thief-arm-left"></div>
+    <div class="thief-arm thief-arm-right"></div>
+    <div class="thief-leg thief-leg-left"></div>
+    <div class="thief-leg thief-leg-right"></div>
+  </div>
+  <div class="stolen-image-holder"></div>
+</div>
+
+<style>
+  .thief {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    transition: none;
+  }
+
+  .thief.hidden {
+    display: none;
+  }
+
+  .thief-body {
+    position: relative;
+    width: 40px;
+    height: 60px;
+  }
+
+  /* Head */
+  .thief-head {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #ffdbac;
+    border-radius: 50%;
+    top: 0;
+    left: 8px;
+    z-index: 3;
+  }
+
+  /* Eyes */
+  .thief-eye {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #333;
+    border-radius: 50%;
+    top: 10px;
+  }
+
+  .thief-eye-left { left: 6px; }
+  .thief-eye-right { right: 6px; }
+
+  /* Mask (like a robber mask) */
+  .thief-mask {
+    position: absolute;
+    width: 28px;
+    height: 10px;
+    background: #1a1a1a;
+    top: 6px;
+    left: -2px;
+    border-radius: 2px;
+  }
+
+  /* Body */
+  .thief-torso {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #2d2d2d;
+    top: 22px;
+    left: 10px;
+    border-radius: 4px;
+  }
+
+  /* Arms */
+  .thief-arm {
+    position: absolute;
+    width: 6px;
+    height: 18px;
+    background: #2d2d2d;
+    top: 24px;
+    border-radius: 3px;
+    transform-origin: top center;
+  }
+
+  .thief-arm-left { left: 4px; }
+  .thief-arm-right { right: 4px; }
+
+  /* Legs */
+  .thief-leg {
+    position: absolute;
+    width: 8px;
+    height: 20px;
+    background: #1a1a1a;
+    top: 40px;
+    border-radius: 4px;
+    transform-origin: top center;
+  }
+
+  .thief-leg-left { left: 10px; }
+  .thief-leg-right { right: 10px; }
+
+  /* Running animation */
+  .thief.running .thief-leg-left {
+    animation: run-leg-left 0.2s ease-in-out infinite;
+  }
+
+  .thief.running .thief-leg-right {
+    animation: run-leg-right 0.2s ease-in-out infinite;
+  }
+
+  .thief.running .thief-arm-left {
+    animation: run-arm-left 0.2s ease-in-out infinite;
+  }
+
+  .thief.running .thief-arm-right {
+    animation: run-arm-right 0.2s ease-in-out infinite;
+  }
+
+  @keyframes run-leg-left {
+    0%, 100% { transform: rotate(-30deg); }
+    50% { transform: rotate(30deg); }
+  }
+
+  @keyframes run-leg-right {
+    0%, 100% { transform: rotate(30deg); }
+    50% { transform: rotate(-30deg); }
+  }
+
+  @keyframes run-arm-left {
+    0%, 100% { transform: rotate(30deg); }
+    50% { transform: rotate(-30deg); }
+  }
+
+  @keyframes run-arm-right {
+    0%, 100% { transform: rotate(-30deg); }
+    50% { transform: rotate(30deg); }
+  }
+
+  /* Carrying pose */
+  .thief.carrying .thief-arm-left,
+  .thief.carrying .thief-arm-right {
+    transform: rotate(-90deg) translateY(-10px);
+    animation: none;
+  }
+
+  /* Stolen image holder */
+  .stolen-image-holder {
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    display: none;
+  }
+
+  .thief.carrying .stolen-image-holder {
+    display: block;
+    animation: roll 0.3s linear infinite;
+  }
+
+  @keyframes roll {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Pushing pose - arms forward */
+  .thief.pushing .thief-arm-left,
+  .thief.pushing .thief-arm-right {
+    transform: rotate(-70deg);
+    animation: none;
+  }
+
+  /* When pushing, show the image holder */
+  .thief.pushing .stolen-image-holder {
+    display: block;
+    animation: roll-slow 0.8s linear infinite;
+  }
+
+  /* When flipped (pushing left), reverse the roll direction */
+  .thief.flip.pushing .stolen-image-holder {
+    animation: roll-slow-reverse 0.8s linear infinite;
+  }
+
+  @keyframes roll-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes roll-slow-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+
+  /* Flip when running left */
+  .thief.flip {
+    transform: scaleX(-1);
+  }
+</style>
+
+<script>
+  let clickCount = 0;
+  let clickTimer: number | null = null;
+  let isAnimating = false;
+
+  const thief = document.getElementById('thief-character')!;
+  const stolenHolder = thief.querySelector('.stolen-image-holder') as HTMLElement;
+
+  function sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  function setPosition(x: number, y: number) {
+    thief.style.left = `${x}px`;
+    thief.style.top = `${y}px`;
+  }
+
+  async function animateToPosition(targetX: number, targetY: number, duration: number) {
+    const startX = parseFloat(thief.style.left) || 0;
+    const startY = parseFloat(thief.style.top) || 0;
+    const startTime = performance.now();
+
+    return new Promise<void>(resolve => {
+      function step(currentTime: number) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Easing function
+        const eased = progress < 0.5
+          ? 2 * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+        const currentX = startX + (targetX - startX) * eased;
+        const currentY = startY + (targetY - startY) * eased;
+
+        setPosition(currentX, currentY);
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          resolve();
+        }
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  async function runEasterEgg() {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const profileChip = document.querySelector('.profile-chip') as HTMLElement;
+    if (!profileChip) {
+      isAnimating = false;
+      return;
+    }
+
+    const profileImg = profileChip.querySelector('img') as HTMLImageElement;
+
+    // Get the EXACT computed dimensions of the image element
+    const computedStyle = window.getComputedStyle(profileImg);
+    const imgWidth = parseFloat(computedStyle.width);
+    const imgHeight = parseFloat(computedStyle.height);
+
+    // Get position from bounding rect
+    const imgRect = profileImg.getBoundingClientRect();
+    const imgLeft = imgRect.left;
+    const imgRight = imgRect.right;
+    const imgCenterY = imgRect.top + imgRect.height / 2;
+
+    // Clone the profile image for the stolen version - EXACT SAME SIZE
+    const stolenImg = profileImg.cloneNode(true) as HTMLImageElement;
+    stolenImg.style.width = `${imgWidth}px`;
+    stolenImg.style.height = `${imgHeight}px`;
+    stolenImg.style.maxWidth = `${imgWidth}px`;
+    stolenImg.style.maxHeight = `${imgHeight}px`;
+    stolenImg.style.minWidth = `${imgWidth}px`;
+    stolenImg.style.minHeight = `${imgHeight}px`;
+    stolenImg.style.borderRadius = '50%';
+    stolenImg.style.objectFit = 'cover';
+    stolenImg.style.display = 'block';
+    stolenImg.className = '';
+    stolenHolder.innerHTML = '';
+    stolenHolder.style.width = `${imgWidth}px`;
+    stolenHolder.style.height = `${imgHeight}px`;
+    stolenHolder.style.overflow = 'hidden';
+    stolenHolder.appendChild(stolenImg);
+
+    // Position the stolen image holder - to the right of thief when pushing right
+    // Thief body is 60px tall, we want image vertically centered with thief
+    const imgTopOffset = 30 - (imgHeight / 2);
+    stolenHolder.style.position = 'absolute';
+    stolenHolder.style.top = `${imgTopOffset}px`;
+    stolenHolder.style.left = '42px'; // To the right of thief
+
+    // Thief Y position - align thief center (30px from top) with image center
+    const thiefY = imgCenterY - 30;
+
+    // PHASE 1: Thief comes from LEFT, stands on LEFT of icon, pushes RIGHT
+    // We want the icon (at left:42 from thief) to align with imgLeft
+    const leftPushPosition = imgLeft - 42;
+
+    // Start off screen left
+    thief.classList.remove('hidden', 'flip', 'pushing', 'carrying');
+    thief.classList.add('running');
+    setPosition(-60, thiefY);
+
+    // Run to left side of profile
+    await animateToPosition(leftPushPosition, thiefY, 1200);
+
+    // Stop and prepare to push
+    thief.classList.remove('running');
+    await sleep(300);
+
+    // Hide real profile, start pushing right
+    profileChip.style.opacity = '0';
+    profileChip.style.transition = 'opacity 0.2s';
+    thief.classList.add('pushing', 'running');
+    await sleep(100);
+
+    // Push off screen to the right
+    await animateToPosition(window.innerWidth + 100, thiefY, 2000);
+
+    // Pause off screen
+    thief.classList.remove('running');
+    await sleep(1000);
+
+    // PHASE 2: Thief comes back from RIGHT, stands on RIGHT of icon, pushes LEFT
+    // With flip, the icon (at left:42 in local coords) appears to the LEFT of the thief visually
+    // Position thief so icon lands at imgLeft. Thief should be to the RIGHT of the final icon position.
+    const rightPushPosition = imgRight + 5;
+
+    // Flip to face left, start pushing from off-screen right
+    thief.classList.add('flip', 'running', 'pushing');
+    setPosition(window.innerWidth + 60, thiefY);
+
+    // Push the icon back to the exact original position
+    await animateToPosition(rightPushPosition, thiefY, 2000);
+
+    // Stop at exact position
+    thief.classList.remove('running', 'pushing');
+    await sleep(200);
+
+    // Show the real profile again
+    profileChip.style.opacity = '1';
+    await sleep(200);
+
+    // Run away to the right
+    thief.classList.remove('flip');
+    thief.classList.add('running');
+    await animateToPosition(window.innerWidth + 100, thiefY, 800);
+
+    // Clean up
+    thief.classList.add('hidden');
+    thief.classList.remove('running', 'flip', 'pushing');
+    profileChip.style.transition = '';
+
+    isAnimating = false;
+  }
+
+  // Wait for DOM to be ready, then attach click listener to profile
+  function init() {
+    const profileChip = document.querySelector('.profile-chip');
+    if (profileChip) {
+      profileChip.style.cursor = 'pointer';
+      profileChip.addEventListener('click', () => {
+        if (isAnimating) return;
+
+        clickCount++;
+
+        // Reset click count after 1 second of no clicks
+        if (clickTimer) {
+          clearTimeout(clickTimer);
+        }
+        clickTimer = window.setTimeout(() => {
+          clickCount = 0;
+        }, 1000);
+
+        // Trigger on 3 clicks
+        if (clickCount >= 3) {
+          clickCount = 0;
+          if (clickTimer) clearTimeout(clickTimer);
+          runEasterEgg();
+        }
+      });
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+</script>
