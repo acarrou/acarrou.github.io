@@ -187,19 +187,9 @@
     animation: roll-slow 0.8s linear infinite;
   }
 
-  /* When flipped (pushing left), reverse the roll direction */
-  .thief.flip.pushing .stolen-image-holder {
-    animation: roll-slow-reverse 0.8s linear infinite;
-  }
-
   @keyframes roll-slow {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
-  }
-
-  @keyframes roll-slow-reverse {
-    from { transform: rotate(360deg); }
-    to { transform: rotate(0deg); }
   }
 
   /* Flip when running left */

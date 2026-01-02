@@ -3,11 +3,11 @@ title: Founder and Technical Lead
 date: 2024 - Present
 location: San Jose, California
 org: Nexus Analytica
+tags: ["Embedded C/C++", "Hardware Bring-up", "Multispectral Imaging", "System Integration"]
 ---
 
-- Founded company specializing in multispectral camera systems and advanced sensing solutions.
-- Lead development of embedded hardware and firmware for specialized imaging applications.
-- Designed and developed FPGA and IoT systems, integrating sensors and communication modules.
-- Created custom PCBs and firmware optimized for performance, reliability, and client requirements.
-- Designed software cloud infrastructure for our data processing and analytics platform.
-- Managed end-to-end product development, from concept through to production and deployment.
+- Founded hardware-first company specializing in multispectral and hyperspectral imaging systems and sensing platforms.
+- Lead end-to-end development of embedded firmware (C/C++) for camera and sensor pipelines.
+- Architect system integration for imaging capture and data handling across hardware and software layers.
+- Designed custom PCBs and performed hardware bring-up for specialized sensing applications.
+- Manage product development lifecycle from concept through integration and deployment.

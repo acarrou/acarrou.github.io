@@ -2,7 +2,7 @@
 title: about
 name: "Adrien Carrou"
 designation: "Software Engineer"
-location: California, USA
+location: Bay Area, CA / Reno, NV
 email: "adriencarrou@gmail.com"
 ---
 
@@ -10,4 +10,6 @@ I’m a passionate engineer driven by the thrill of blending hardware and softwa
 
 Currently, I’m immersed in the space industry, working on cutting edge aerospace technologies that demand precision and reliability. At the same time, I’m exploring the world of medical device engineering, inspired by the opportunity to directly improve people’s lives through inventive design. No matter the domain, I bring a creative, problem solving mindset to ensure every system I craft is both powerful and purposeful.
 
-Outside of work, I channel my engineering curiosity into personal passion projects tinkering, prototyping, and occasionally open sourcing my ideas. I have a passion for teaching and sharing knowledge, whether through mentoring colleagues or creating educational content. When I'm not working on projects, I love traveling with my girlfriend and friends allows me to explore new cultures, broaden my viewpoint, and spark fresh innovation. These experiences both in and out of the lab keep me motivated to forge solutions that benefit our ever-evolving world.
+Outside of work, I channel my engineering curiosity into personal passion projects—tinkering, prototyping, and contributing to open-source embedded projects. I'm actively interested in teaching and mentorship, drawing on my experience leading student teams in robotics and CubeSat projects at SJSU. I'm currently seeking part-time teaching opportunities in computer science and computer engineering. When I'm not working on projects, traveling with my girlfriend and friends helps me explore new cultures and spark fresh ideas.
+
+**Interests:** Teaching/mentorship in CS and embedded systems | Open-source embedded development | Aerospace systems

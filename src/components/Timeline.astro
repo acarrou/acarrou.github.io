@@ -1,0 +1,417 @@
+---
+// Vertical interactive career timeline with grouped concurrent events
+import { Icon } from "astro-icon/components";
+
+interface TimelineItem {
+  title: string;
+  subtitle?: string;
+  type: 'education' | 'work' | 'project' | 'leadership';
+  highlight?: string;
+  details?: string[];
+}
+
+interface TimelineGroup {
+  year: string;
+  endYear?: string;
+  current?: boolean;
+  items: TimelineItem[];
+}
+
+const timeline: TimelineGroup[] = [
+  {
+    year: '2018',
+    endYear: '2023',
+    items: [
+      {
+        title: 'San Jose State University',
+        subtitle: 'B.S. Computer Engineering',
+        type: 'education',
+        highlight: 'Strong hands-on embedded systems focus',
+        details: ['Embedded Systems', 'Digital Design', 'Hardware/Software Integration']
+      },
+      {
+        title: 'Astraeus-I & Libhal',
+        subtitle: 'Flight Computer & Open Source',
+        type: 'project',
+        highlight: 'Built flight computer for high-altitude rocket; contributing to open-source embedded HAL',
+        details: ['ARM Cortex-M', 'Embedded C/C++', 'Sensor Acquisition', 'Validation & Testing']
+      }
+    ]
+  },
+  {
+    year: '2021',
+    endYear: '2022',
+    items: [
+      {
+        title: 'Alef Aeronautics',
+        subtitle: 'Engineering Intern',
+        type: 'work',
+        highlight: 'Avionics systems development and integration testing',
+        details: ['Avionics Integration', 'Embedded C++', 'Test Automation']
+      }
+    ]
+  },
+  {
+    year: '2021',
+    endYear: '2023',
+    items: [
+      {
+        title: 'SJSU Robotics & Cube3',
+        subtitle: 'Club Leadership',
+        type: 'leadership',
+        highlight: 'Led teams building Mars rover and CubeSat projects',
+        details: ['Team Leadership', 'Project Execution', 'Mentorship', 'Embedded Systems']
+      }
+    ]
+  },
+  {
+    year: '2022',
+    endYear: '2023',
+    items: [
+      {
+        title: 'Maxar Technologies',
+        subtitle: 'Software / Test Automation Engineer',
+        type: 'work',
+        highlight: 'Space systems verification and test automation',
+        details: ['Python Automation', 'CI/Test Frameworks', 'Satellite Systems']
+      }
+    ]
+  },
+  {
+    year: '2023',
+    current: true,
+    items: [
+      {
+        title: 'Lanteris Space Systems',
+        subtitle: 'Software Dev Engineer',
+        type: 'work',
+        highlight: 'Space systems software development',
+        details: ['Embedded/Real-time Systems', 'C/C++', 'Linux']
+      }
+    ]
+  },
+  {
+    year: '2024',
+    current: true,
+    items: [
+      {
+        title: 'Johns Hopkins University',
+        subtitle: 'M.S. ECE',
+        type: 'education',
+        highlight: 'Graduate studies in electrical and computer engineering',
+        details: ['Digital Signal Processing', 'Image Engineering', 'Probability & Stochastic Processes']
+      },
+      {
+        title: 'Nexus Analytica',
+        subtitle: 'Founder & Tech Lead',
+        type: 'work',
+        highlight: 'Hardware-first imaging and sensing systems development',
+        details: ['Multispectral/Hyperspectral Imaging', 'Embedded Firmware', 'Hardware Bring-up', 'System Integration']
+      }
+    ]
+  }
+];
+
+const typeColors: Record<string, string> = {
+  education: 'bg-blue-500',
+  work: 'bg-green-500',
+  project: 'bg-purple-500',
+  leadership: 'bg-orange-500'
+};
+
+const typeBorderColors: Record<string, string> = {
+  education: 'border-blue-500',
+  work: 'border-green-500',
+  project: 'border-purple-500',
+  leadership: 'border-orange-500'
+};
+
+const typeIcons: Record<string, string> = {
+  education: 'carbon:education',
+  work: 'carbon:building',
+  project: 'carbon:code',
+  leadership: 'carbon:group'
+};
+---
+
+<div class="timeline-wrapper">
+  <!-- Legend -->
+  <div class="timeline-legend">
+    <span class="legend-item"><span class="legend-dot bg-blue-500"></span>Education</span>
+    <span class="legend-item"><span class="legend-dot bg-green-500"></span>Work</span>
+    <span class="legend-item"><span class="legend-dot bg-purple-500"></span>Projects</span>
+    <span class="legend-item"><span class="legend-dot bg-orange-500"></span>Leadership</span>
+  </div>
+
+  <div class="timeline-container">
+    {timeline.map((group, groupIndex) => (
+      <div class={`timeline-group ${group.current ? 'current' : ''}`}>
+        <div class="timeline-marker">
+          <div class={`marker-dot ${group.current ? 'pulse' : ''}`}></div>
+          <div class="timeline-line"></div>
+        </div>
+
+        <div class="timeline-content">
+          <span class="timeline-year">
+            {group.year}{group.endYear && !group.current ? ` - ${group.endYear}` : ''}{group.current ? ' - Present' : ''}
+          </span>
+
+          <div class="timeline-cards">
+            {group.items.map((item, itemIndex) => (
+              <div
+                class={`timeline-card ${typeBorderColors[item.type]}`}
+                data-card-id={`${groupIndex}-${itemIndex}`}
+              >
+                <div class="card-header">
+                  <div class={`card-icon-wrapper ${typeColors[item.type]}`}>
+                    <Icon name={typeIcons[item.type]} class="card-icon" />
+                  </div>
+                  <div class="card-content">
+                    <h4 class="card-title">{item.title}</h4>
+                    {item.subtitle && <p class="card-subtitle">{item.subtitle}</p>}
+                  </div>
+                  {(item.highlight || item.details) && (
+                    <Icon name="carbon:chevron-down" class="expand-icon" />
+                  )}
+                </div>
+
+                {(item.highlight || item.details) && (
+                  <div class="card-details">
+                    {item.highlight && <p class="card-highlight">{item.highlight}</p>}
+                    {item.details && (
+                      <div class="card-tags">
+                        {item.details.map((tag) => (
+                          <span class="card-tag">{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .timeline-wrapper {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .timeline-legend {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.7rem;
+    opacity: 0.7;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .timeline-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+  }
+
+  .timeline-group {
+    display: flex;
+    gap: 12px;
+    position: relative;
+  }
+
+  .timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 16px;
+  }
+
+  .marker-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.3;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+
+  .timeline-group.current .marker-dot {
+    background: rgb(34, 197, 94);
+    opacity: 1;
+  }
+
+  .marker-dot.pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+    50% { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+  }
+
+  .timeline-line {
+    width: 2px;
+    flex: 1;
+    background: currentColor;
+    opacity: 0.1;
+    margin-top: 4px;
+  }
+
+  .timeline-group:last-child .timeline-line {
+    display: none;
+  }
+
+  .timeline-content {
+    flex: 1;
+    padding-bottom: 16px;
+    min-width: 0;
+  }
+
+  .timeline-year {
+    font-size: 0.7rem;
+    font-weight: 700;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .timeline-group.current .timeline-year {
+    color: rgb(34, 197, 94);
+    opacity: 1;
+  }
+
+  .timeline-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .timeline-card {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border-left: 3px solid;
+    background: rgba(128, 128, 128, 0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .timeline-card:hover {
+    background: rgba(128, 128, 128, 0.1);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-icon-wrapper {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-icon {
+    width: 14px;
+    height: 14px;
+    color: white;
+  }
+
+  .expand-icon {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    opacity: 0.4;
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .timeline-card.expanded .expand-icon {
+    transform: rotate(180deg);
+  }
+
+  .card-content {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .card-subtitle {
+    font-size: 0.65rem;
+    opacity: 0.6;
+  }
+
+  .card-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease, margin-top 0.2s ease, opacity 0.2s ease;
+    opacity: 0;
+    padding-left: 32px;
+  }
+
+  .timeline-card.expanded .card-details {
+    max-height: 150px;
+    margin-top: 8px;
+    opacity: 1;
+  }
+
+  .card-highlight {
+    font-size: 0.65rem;
+    font-style: italic;
+    opacity: 0.7;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .card-tag {
+    font-size: 0.55rem;
+    padding: 2px 6px;
+    background: rgba(128, 128, 128, 0.15);
+    border-radius: 3px;
+    opacity: 0.8;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.timeline-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('expanded');
+    });
+  });
+</script>
