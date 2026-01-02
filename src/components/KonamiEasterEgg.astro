@@ -313,6 +313,8 @@
     await sleep(300);
 
     // Hide real profile, start pushing right
+    // Remove animation class to allow opacity override
+    profileChip.style.animation = 'none';
     profileChip.style.opacity = '0';
     profileChip.style.transition = 'opacity 0.2s';
     thief.classList.add('pushing', 'running');
@@ -354,6 +356,7 @@
     thief.classList.add('hidden');
     thief.classList.remove('running', 'flip', 'pushing');
     profileChip.style.transition = '';
+    profileChip.style.animation = '';
 
     isAnimating = false;
   }

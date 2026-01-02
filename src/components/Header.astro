@@ -3,7 +3,7 @@ import * as about from "../content/about/about.md";
 import Location from "./Location.astro";
 ---
 
-<header class="mx-auto m-3">
+<header class="mx-auto m-3 header-animate">
   <div class="flex flex-col items-center">
     <div class="profile-chip w-20 rounded-full shadow-md overflow-hidden">
       <img
@@ -13,13 +13,13 @@ import Location from "./Location.astro";
       />
     </div>
     <div class="text-center justify-center">
-      <h1 class="text-3xl font-bold">
+      <h1 class="text-3xl font-bold header-name">
         {about.frontmatter.name}
       </h1>
-      <h2 class="text-xl">
+      <h2 class="text-xl header-title">
         {about.frontmatter.designation}
       </h2>
-      <div class="flex justify-center">
+      <div class="flex justify-center header-location">
         <Location location={about.frontmatter.location} />
       </div>
     </div>
@@ -27,6 +27,36 @@ import Location from "./Location.astro";
 </header>
 
 <style>
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .header-animate .profile-chip {
+    animation: slideUp 0.4s ease-out forwards;
+  }
+
+  .header-animate .header-name {
+    opacity: 0;
+    animation: slideUp 0.4s ease-out 0.1s forwards;
+  }
+
+  .header-animate .header-title {
+    opacity: 0;
+    animation: slideUp 0.4s ease-out 0.15s forwards;
+  }
+
+  .header-animate .header-location {
+    opacity: 0;
+    animation: slideUp 0.4s ease-out 0.2s forwards;
+  }
+
   .profile-chip {
     cursor: pointer;
     transition: transform 0.2s ease;

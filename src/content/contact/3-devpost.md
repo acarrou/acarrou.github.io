@@ -1,5 +1,5 @@
 ---
 title: Devpost
-icon: carbon:logo-gitlab
+icon: simple-icons:devpost
 url: https://devpost.com/adrien-carrou
 ---

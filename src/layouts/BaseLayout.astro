@@ -8,6 +8,7 @@ import CircuitBackground from "../components/CircuitBackground.astro";
 import KonamiEasterEgg from "../components/KonamiEasterEgg.astro";
 
 const url = new URL(Astro.url.pathname, Astro.site).toString();
+const siteUrl = Astro.site?.toString() || "https://adrien-carrou.dev";
 ---
 
 <!doctype html>
@@ -18,31 +19,87 @@ const url = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <SEO
-      title="Adrien Carrou"
-      description="A passionate software engineer with expertise in embedded systems, PCB design, and robotics."
+      title="Adrien Carrou | Embedded & Aerospace Software Engineer"
+      description="Embedded systems and aerospace software engineer specializing in spacecraft flight software, avionics, firmware development, and hardware integration. Currently at Lanteris Space Systems and pursuing M.S. ECE at Johns Hopkins."
+      canonical={url}
       openGraph={{
         basic: {
           url: url,
-          title: "Adrien Carrou",
+          title: "Adrien Carrou | Embedded & Aerospace Software Engineer",
           type: "website",
-          image: "/profile.png",
+          image: `${siteUrl}profile.png`,
         },
+        optional: {
+          description: "Embedded systems and aerospace software engineer specializing in spacecraft flight software, avionics, and firmware development.",
+          siteName: "Adrien Carrou",
+        },
+      }}
+      twitter={{
+        card: "summary",
+        title: "Adrien Carrou | Embedded & Aerospace Software Engineer",
+        description: "Embedded systems and aerospace software engineer specializing in spacecraft flight software, avionics, and firmware development.",
+        image: `${siteUrl}profile.png`,
       }}
       extend={{
         link: [{ rel: "icon", href: "/favicon.ico" }],
+        meta: [
+          { name: "author", content: "Adrien Carrou" },
+          { name: "keywords", content: "embedded systems, aerospace, spacecraft software, avionics, firmware, C++, space systems, flight software, hardware engineer" },
+        ],
       }}
     />
-    <title>Adrien Carrou</title>
+    <title>Adrien Carrou | Embedded & Aerospace Software Engineer</title>
   </head>
   <Header />
   <body class="flex flex-col min-h-screen">
     <CircuitBackground />
     <KonamiEasterEgg />
     <ThemeToggle />
-    <main class="mx-auto max-w-5xl">
+    <main class="mx-auto max-w-5xl animate-fade-in">
       <hr />
       <slot />
     </main>
   </body>
   <Footer />
 </html>
+
+<style is:global>
+  /* Fade in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  /* Staggered animation for dropdown sections */
+  .join-vertical > *:nth-child(1) { animation-delay: 0.05s; }
+  .join-vertical > *:nth-child(2) { animation-delay: 0.1s; }
+  .join-vertical > *:nth-child(3) { animation-delay: 0.15s; }
+  .join-vertical > *:nth-child(4) { animation-delay: 0.2s; }
+  .join-vertical > *:nth-child(5) { animation-delay: 0.25s; }
+  .join-vertical > *:nth-child(6) { animation-delay: 0.3s; }
+
+  .join-vertical > * {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  /* Smooth transitions for interactive elements */
+  a, button, .btn, .collapse {
+    transition: all 0.2s ease;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

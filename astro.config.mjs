@@ -8,5 +8,11 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://adrien-carrou.dev',
-  integrations: [tailwind(), icon(), compress(), sitemap()]
+  integrations: [tailwind(), icon({
+    include: {
+      carbon: ["*"],
+      mdi: ["*"],
+      "simple-icons": ["devpost"]
+    }
+  }), compress(), sitemap()]
 });
