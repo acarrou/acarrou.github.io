@@ -1,13 +1,11 @@
 ---
-title: Software / Test Automation Engineer
-date: 2022 - 2023
+title: Test Automation Engineer
+date: May 2022 - Dec 2023
 location: Remote, California
 org: Maxar Technologies
-tags: ["Python", "Test Automation", "CI/CD", "Satellite Systems"]
+tags: ["Python", "Test Automation", "Satellite Flight Software", "CI/CD"]
 ---
 
-- Developed and configured automation pipelines for satellite simulation and test script execution.
-- Built test frameworks supporting space systems verification workflows.
-- Leveraged Linux and Python to enhance development processes and automation reliability.
-- Documented configuration, usage, and maintenance procedures for CI/test infrastructure. 
-
+- Built simulation and test-automation pipelines for satellite flight software verification, including configuration management and reproducible-run procedures.
+- Wrote Python tooling for log parsing, test harness setup, and result aggregation across simulated and real-hardware runs.
+- Authored configuration, runbook, and integration documentation for downstream test engineers.
