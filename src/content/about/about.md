@@ -1,12 +1,12 @@
 ---
 title: about
 name: "Adrien Carrou"
-designation: "Software Engineer"
+designation: "Staff Software Development Engineer"
 location: Bay Area, CA / Reno, NV
 email: "adriencarrou@gmail.com"
 ---
 
-I'm a Software Engineer at Intuitive Machines, working on embedded flight software for spacecraft mechanisms and the systems that test them. I hold a B.S. in Computer Engineering from San José State University and an M.S. in Electrical and Computer Engineering from Johns Hopkins University.
+I'm a Staff Software Development Engineer at Intuitive Machines, working on embedded flight software for spacecraft mechanisms and the systems that test them. I hold a B.S. in Computer Engineering from San José State University and an M.S. in Electrical and Computer Engineering from Johns Hopkins University.
 
 The day-to-day is C/C++ across a multi-processor flight stack — stepper motor controllers for solar array drive and beam articulation mechanisms, sensor I/O, command and telemetry interfaces, autonomous fault-detection monitors — plus the Python hardware-in-the-loop and software-in-the-loop infrastructure that exercises it end-to-end. Before this I built Python test-automation pipelines for satellite flight software verification at Maxar Technologies.
 

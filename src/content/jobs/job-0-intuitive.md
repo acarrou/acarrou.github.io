@@ -1,5 +1,5 @@
 ---
-title: Software Development Engineer
+title: Staff Software Development Engineer
 date: Dec 2023 - Present
 location: San Jose, California
 org: Intuitive Machines
