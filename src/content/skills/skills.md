@@ -64,6 +64,10 @@
 - Air Quality Sensors: Pollution monitoring.
 - Ultrasonic / PIR / Hall Effect Sensors: Distance measurement, motion detection, and magnetic field sensing.
 
-#### Tooling & Workflow
-- Version Control: Git and GitLab, including multi-repo submodule workflows and merge-conflict resolution.
-- Code Review: Merge request / pull request review workflows on distributed teams.
+#### Process & Collaboration
+- Version Control: Git and GitLab, including multi-repo submodule workflows, submodule pins, release tagging, and merge-conflict resolution.
+- Code Review & CI: Merge request / pull request review workflows and GitLab CI on distributed teams.
+- Ticketing: Jira-driven ticket workflows, from intake and triage through closure.
+- Requirements Verification: Formal verification reports and test reporting against customer requirements.
+- Test Campaigns: Planning and running campaigns across simulation and engineering-model hardware benches; authoring procedures and runbooks.
+- Agile/Scrum: Sprint planning and cross-team engineering coordination.

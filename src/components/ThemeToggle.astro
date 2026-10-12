@@ -1,19 +1,43 @@
+---
+// Light/dark toggle. The initial theme is applied by the blocking inline
+// script in BaseLayout <head> so there is no flash; this component only
+// mirrors that state into the checkbox and handles user changes.
+---
+
 <script>
-  import { themeChange } from "theme-change";
-  themeChange();
+  const DARK = "black";
+  const LIGHT = "lofi";
+  const KEY = "theme";
 
-  const storedTheme = localStorage.getItem("theme");
-  if (storedTheme === null) {
-    document.documentElement.setAttribute("data-theme", "black");
-  } else {
-    document.documentElement.setAttribute("data-theme", storedTheme);
-  }
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLInputElement>("input[data-theme-toggle]");
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-  // Sync checkbox state with stored theme
-  const toggle = document.querySelector('input[data-toggle-theme]') as HTMLInputElement;
-  if (toggle && storedTheme === "lofi") {
-    toggle.checked = true;
-  }
+  const apply = (theme: string) => {
+    root.setAttribute("data-theme", theme);
+    if (toggle) toggle.checked = theme === LIGHT;
+  };
+
+  // Mirror whatever the head script already applied.
+  apply(root.getAttribute("data-theme") === LIGHT ? LIGHT : DARK);
+
+  toggle?.addEventListener("change", () => {
+    const theme = toggle.checked ? LIGHT : DARK;
+    apply(theme);
+    try {
+      localStorage.setItem(KEY, theme);
+    } catch {}
+  });
+
+  // Follow OS changes only while the visitor has not picked a theme.
+  media.addEventListener("change", (e) => {
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem(KEY);
+    } catch {}
+    if (stored === DARK || stored === LIGHT) return;
+    apply(e.matches ? DARK : LIGHT);
+  });
 </script>
 
 <div
@@ -29,12 +53,14 @@
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
+    aria-hidden="true"
   >
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
   </svg>
   <input
     type="checkbox"
-    data-toggle-theme="black,lofi"
+    data-theme-toggle
+    aria-label="Switch between dark and light theme"
     class="toggle toggle-sm mx-1 bg-secondary"
   />
   <svg
@@ -47,6 +73,7 @@
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
+    aria-hidden="true"
   >
     <circle cx="12" cy="12" r="5"></circle>
     <path

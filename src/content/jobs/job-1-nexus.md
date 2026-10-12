@@ -7,7 +7,6 @@ url: https://www.nexusanalytica.net/
 tags: ["Embedded C/C++", "Hardware Bring-up", "Multispectral Imaging", "FPGA", "PCB Design"]
 ---
 
-- Founded company specializing in multispectral and hyperspectral imaging systems.
-- Lead embedded firmware and hardware development for sensor integration and acquisition pipelines.
-- Designed multi-layer PCBs and FPGA-based acquisition logic for high-throughput sensing applications.
-- Built custom firmware optimized for client-specific reliability and performance requirements.
+- Founded a company specializing in multispectral and hyperspectral imaging systems.
+- Lead embedded firmware and hardware development, integrating sensors and building data acquisition pipelines.
+- Develop custom firmware, multilayer PCBs, and FPGA-based acquisition logic to meet client-specific reliability and performance requirements.
